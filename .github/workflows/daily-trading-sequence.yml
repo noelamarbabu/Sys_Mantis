@@ -46,7 +46,7 @@ jobs:
       - name: Install dependencies
         env:
           PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
-        run: npm ci
+        run: sudo npm ci
 
       - name: Run trading_sequence.js
         run: node trading_sequence.js
