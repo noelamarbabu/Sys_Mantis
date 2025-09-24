@@ -33,7 +33,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update
-          sudo apt-get install -y ca-certificates fonts-liberation libappindicator3-1 libatk-bridge2.0-0 libgtk-3-0 libgbm1 libnss3 libxss1 libasound2 chromium-browser chromium
+          sudo apt-get install -y ca-certificates fonts-liberation libappindicator3-1 libatk-bridge2.0-0 libgtk-3-0 libgbm1 libnss3 libxss1 libasound2t64 chromium-browser chromium
 
       - name: Cache npm
         uses: actions/cache@v4
@@ -47,35 +47,6 @@ jobs:
         env:
           PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
         run: npm ci
-
-      - name: Wait for package installation to settle (20 minutes)
-        run: |
-          echo "Waiting 20 minutes to allow package installations to finish..."
-          sleep 1200
-
-      - name: Wait until 15:40 America/New_York (20 minutes before Nasdaq close)
-        run: |
-          echo "Calculating wait time to 15:40 America/New_York..."
-          NOW=$(TZ=America/New_York date +%s)
-          TARGET=$(TZ=America/New_York date -d '15:40 today' +%s 2>/dev/null || true)
-          if [ -z "$TARGET" ]; then
-            TARGET=$(TZ=America/New_York date -d '15:40 tomorrow' +%s)
-          fi
-          if [ "$TARGET" -le "$NOW" ]; then
-            echo "Target already passed for today. Exiting without running trading_sequence.js."
-            exit 0
-          fi
-          DELAY=$((TARGET - NOW))
-          # Cap the computed delay to a safe maximum to avoid exceeding runner timeout (user expects ~40 minutes; give 50 minutes cap)
-          MAX_DELAY=$((50 * 60))
-          if [ "$DELAY" -gt "$MAX_DELAY" ]; then
-            echo "Computed delay ($DELAY s) exceeds max allowed wait ($MAX_DELAY s). Capping to $MAX_DELAY s."
-            DELAY=$MAX_DELAY
-          fi
-          echo "Sleeping for $DELAY seconds until (or near) 15:40 America/New_York"
-          sleep $DELAY
-
-      # Pre-flight Chromium check removed per user request
 
       - name: Run trading_sequence.js
         run: node trading_sequence.js
