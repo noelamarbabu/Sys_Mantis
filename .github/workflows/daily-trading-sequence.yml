@@ -46,7 +46,7 @@ jobs:
       - name: Install dependencies
         env:
           PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: "true"
-        run: sudonpm install --no-package-lock # Changed from npm ci to npm install with --no-package-lock flag
+        run: sudo npm install --no-package-lock # Changed from npm ci to npm install with --no-package-lock flag
 
       - name: Run trading_sequence.js
         run: node trading_sequence.js
