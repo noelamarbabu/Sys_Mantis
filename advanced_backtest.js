@@ -658,6 +658,13 @@ async function generateAdvancedPdfReport(results) {
 
     const tradeAnalysis = generateTradeAnalysis(trades);
 
+    // Configure Puppeteer to use system Chrome if available
+    const browser = await puppeteer.launch({
+      args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      headless: true,
+      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || undefined,
+    });
+
     // Create HTML content
     const htmlContent = `
       <html>
@@ -830,10 +837,6 @@ ${aiAnalysisReport}
     `;
 
     // Generate PDF
-    const browser = await puppeteer.launch({
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-      headless: true,
-    });
     const page = await browser.newPage();
     await page.setContent(htmlContent, { waitUntil: "networkidle0" });
     await page.pdf({
