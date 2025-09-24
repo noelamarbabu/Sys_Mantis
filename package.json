@@ -1,0 +1,47 @@
+{
+  "name": "ai-trading-engine",
+  "version": "1.0.0",
+  "description": "Ultra-fast AI-powered trading decision engine with real-time monitoring",
+  "main": "start_trading.js",
+  "scripts": {
+    "start": "node start_trading.js",
+    "test": "node start_trading.js test",
+    "status": "node start_trading.js status",
+    "benchmark": "node start_trading.js benchmark",
+    "backtest": "node advanced_backtest.js",
+    "setup": "node setup.js"
+  },
+  "dependencies": {
+    "canvas": "^3.2.0",
+    "chart.js": "^4.5.0",
+    "chartjs-node-canvas": "^5.0.0",
+    "dotenv": "^17.2.2",
+    "exceljs": "^4.4.0",
+    "express": "^5.1.0",
+    "fs-extra": "^11.3.2",
+    "groq-sdk": "^0.32.0",
+    "html-pdf": "^3.0.1",
+    "jsdom": "^27.0.0",
+    "moment": "^2.30.1",
+    "node-telegram-bot-api": "^0.66.0",
+    "ora": "^5.4.1",
+    "puppeteer": "^24.22.2",
+    "technicalindicators": "^3.1.0",
+    "ws": "^8.18.3",
+    "yahoo-finance2": "^2.13.3"
+  },
+  "keywords": [
+    "trading",
+    "ai",
+    "algorithmic-trading",
+    "finance",
+    "machine-learning",
+    "real-time",
+    "monitoring"
+  ],
+  "author": "Sys-Mantis Trading Systems",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
