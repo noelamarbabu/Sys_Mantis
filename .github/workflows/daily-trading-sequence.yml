@@ -1,9 +1,6 @@
 name: Daily Trading Sequence
 
 on:
-  schedule:
-    # Runs at 19:20 UTC Monday-Friday (job will compute ET and wait until 15:40 America/New_York)
-    - cron: "20 19 * * 1-5"
   workflow_dispatch: {}
 
 concurrency:
